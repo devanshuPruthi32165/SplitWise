@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm install --production",
     "start": "node src/server.js",
     "build": "echo \"No build step required for backend\"",
     "dev": "nodemon src/server.js",

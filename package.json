@@ -1,0 +1,13 @@
+{
+  "name": "splitwise",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install": "npm --prefix backend install && npm --prefix Frontend install",
+    "build": "npm --prefix Frontend run build",
+    "build:apk": "npm --prefix Frontend run build:apk",
+    "backend:start": "npm --prefix backend run start",
+    "frontend:start": "npm --prefix Frontend run start",
+    "start": "npm run backend:start"
+  }
+}

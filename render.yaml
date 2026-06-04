@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: splitwise-backend
+    env: node
+    region: oregon
+    plan: free
+    branch: main
+    root: backend
+    buildCommand: npm install
+    startCommand: npm run start
+    envVars:
+      - key: MONGODB_URI
+      - key: JWT_SECRET
+      - key: PORT
