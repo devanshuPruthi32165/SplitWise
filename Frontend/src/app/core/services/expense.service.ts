@@ -36,4 +36,12 @@ export class ExpenseService {
       participantIds
     });
   }
+
+  updateExpense(expenseId: string, data: { description?: string; amount?: number; participantIds?: string[] }) {
+    return this.http.patch<{ expense: Expense }>(`${this.apiUrl}/${expenseId}`, data);
+  }
+
+  deleteExpense(expenseId: string) {
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/${expenseId}`);
+  }
 }

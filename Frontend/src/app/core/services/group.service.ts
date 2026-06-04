@@ -24,4 +24,32 @@ export class GroupService {
   createGroup(name: string, memberIds: string[]): Observable<{ group: Group }> {
     return this.http.post<{ group: Group }>(this.apiUrl, { name, memberIds });
   }
+
+  inviteMember(groupId: string, email: string): Observable<{ group: Group }> {
+    return this.http.post<{ group: Group }>(`${this.apiUrl}/${groupId}/invite`, { email });
+  }
+
+  getGroupSettlements(groupId: string): Observable<{
+    balances: Array<{ userId: string; name: string; email: string; balance: number }>;
+    expenses?: any[];
+    transfers?: Array<{
+      from: { userId: string; name: string; email?: string };
+      to: { userId: string; name: string; email?: string };
+      amount: number;
+    }>;
+  }> {
+    return this.http.get<{
+      balances: Array<{ userId: string; name: string; email: string; balance: number }>;
+      expenses?: any[];
+      transfers?: Array<{
+        from: { userId: string; name: string; email?: string };
+        to: { userId: string; name: string; email?: string };
+        amount: number;
+      }>;
+    }>(`${this.apiUrl}/${groupId}/settlements`);
+  }
+
+  settle(groupId: string, toUserId: string, amount: number) {
+    return this.http.post<{ settlement: any; balances: any; transfers: any[] }>(`${this.apiUrl}/${groupId}/settle`, { toUserId, amount });
+  }
 }
