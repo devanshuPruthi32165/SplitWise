@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from './api.constants';
 
 export interface Group {
   _id: string;
@@ -13,7 +14,7 @@ export interface Group {
   providedIn: 'root'
 })
 export class GroupService {
-  private apiUrl = 'http://localhost:5000/api/groups';
+  private apiUrl = `${API_BASE_URL}/groups`;
 
   constructor(private http: HttpClient) { }
 
