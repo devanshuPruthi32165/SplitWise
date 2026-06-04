@@ -19,9 +19,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - uses: r0adkll/setup-android@v2
+      - uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: '33'
+          api-level: 33
+          target: google_apis
+          arch: x86_64
           build-tools: '33.0.2'
       - name: Install frontend dependencies
         working-directory: Frontend
