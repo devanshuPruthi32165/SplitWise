@@ -19,15 +19,14 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Install Android SDK platform-tools
+        run: sudo apt-get update && sudo apt-get install -y android-sdk-platform-tools
       - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
           target: google_apis
           arch: x86_64
-          build-tools: '33.0.2'
-      - name: Install frontend dependencies
-        working-directory: Frontend
-        run: npm install
+          script: echo "Emulator ready"
       - name: Initialize Capacitor config
         working-directory: Frontend
         run: npx cap init splitwise-app com.example.splitwise --web-dir=dist || true
