@@ -9,6 +9,8 @@ on:
 jobs:
   build-apk:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -61,4 +63,4 @@ jobs:
           tag: "v1.0.${{ github.run_number }}"
           name: "SplitWise APK #${{ github.run_number }}"
           body: "Automated debug APK build from workflow run ${{ github.run_number }}."
-          files: "Frontend/android/app/build/outputs/apk/debug/app-debug.apk"
+          artifacts: "Frontend/android/app/build/outputs/apk/debug/app-debug.apk"
