@@ -35,18 +35,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Initialize Capacitor config
-        working-directory: Frontend
-        run: npx cap init splitwise-app com.example.splitwise --web-dir=dist || true
-      - name: Add Android platform
-        working-directory: Frontend
-        run: npx cap add android || true
       - name: Build web assets
         working-directory: Frontend
         run: npm run build
-      - name: Copy web assets to Android
+      - name: Add Android platform
         working-directory: Frontend
-        run: npx cap copy android
+        run: npx cap add android || true
+      - name: Sync web assets and plugins to Android
+        working-directory: Frontend
+        run: npx cap sync android
       - name: Ensure Gradle is executable
         working-directory: Frontend/android
         run: chmod +x ./gradlew
