@@ -35,7 +35,6 @@ if (1 == 1) {
     setInterval(() => {
         https.get(BACKEND_URL, (res) => {
         }).on('error', (err) => {
-            console.error(`Keep-alive error: ${err.message}`);
         });
     }, 2000); // 14 minutes
     console.log(`🚀 Keep-alive active for: ${BACKEND_URL}`);
