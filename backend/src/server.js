@@ -36,7 +36,7 @@ if (1 == 1) {
         https.get(BACKEND_URL, (res) => {
         }).on('error', (err) => {
         });
-    }, 2000); // 14 minutes
+    }, 10 * 60 * 1000); // 14 minutes
     console.log(`🚀 Keep-alive active for: ${BACKEND_URL}`);
 } else {
     console.log("⚠️  Not keeping server alive in non-production environment");
