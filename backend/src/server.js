@@ -28,6 +28,21 @@ app.use('/api/groups', groupRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/settlements', settlementRoutes);
 
+if (1==1) {
+    const BACKEND_URL = `https://splitwise-zi93.onrender.com`;
+
+    // Ping the server every 14 minutes (840,000 ms)
+    setInterval(() => {
+        https.get(BACKEND_URL, (res) => {
+            console.log(`Keep-alive ping status: ${res.statusCode}`);
+        }).on('error', (err) => {
+            console.error(`Keep-alive ping error: ${err.message}`);
+        });
+    }, 500);
+    console.log(`🚀 Keep-alive active for: ${BACKEND_URL}`);
+} else {
+    console.log("⚠️  Not keeping server alive in non-production environment");
+}
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
