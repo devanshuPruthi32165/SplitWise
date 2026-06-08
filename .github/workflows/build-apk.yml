@@ -15,18 +15,26 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Frontend/package.json
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
       - name: Install Android SDK platform-tools
         run: sudo apt-get update && sudo apt-get install -y android-sdk-platform-tools
-      - uses: reactivecircus/android-emulator-runner@v2
+      - name: Install frontend dependencies
+        working-directory: Frontend
+        run: npm install
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
         with:
-          api-level: 33
-          target: google_apis
-          arch: x86_64
-          script: echo "Emulator ready"
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Initialize Capacitor config
         working-directory: Frontend
         run: npx cap init splitwise-app com.example.splitwise --web-dir=dist || true
