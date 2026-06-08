@@ -34,7 +34,6 @@ if (1 == 1) {
     // Ping the server every 14 minutes (840,000 ms)
     setInterval(() => {
         https.get(BACKEND_URL, (res) => {
-            console.log(`Keep-alive ping status: ${res.statusCode}`);
         }).on('error', (err) => {
             console.error(`Keep-alive error: ${err.message}`);
         });
